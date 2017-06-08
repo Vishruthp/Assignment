@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Theme App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script src="jquery-ui.js" type="text/javascript"></script>
+    <script src="bootstrap.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="" href="bootstrap.min.css">
+    <link rel="stylesheet" type="" href="index.css">
+    <script type="text/javascript" src="index.js">
+    </script>
+
+</head>
+
+<body background="Autumn-Garden-HD-Wallpaper1.jpg">
+    <center>
+        <div class="container ">
+
+            <h3 style="color: white">
+                <center>Registration</center>
+            </h3>
+            <h2 style="color:white;"> Upload a Pic </h2>
+            <input type="file" id="files" name="files[]" multiple style="color:white;" />
+            <output id="list"></output>
+            <style>
+                .thumb {
+                    height: 75px;
+                    border: 1px solid #000;
+                    margin: 10px 5px 0 0;
+                    color: white;
+                }
+            </style>
+            <script>
+                function handleFileSelect(evt) {
+                    var files = evt.target.files; // FileList object
+
+                    // Loop through the FileList and render image files as thumbnails.
+                    for (var i = 0, f; f = files[i]; i++) {
+
+                        // Only process image files.
+                        if (!f.type.match('image.*')) {
+                            continue;
+                        }
+
+                        var reader = new FileReader();
+
+                        // Closure to capture the file information.
+                        reader.onload = (function(theFile) {
+                            return function(e) {
+                                // Render thumbnail.
+                                var span = document.createElement('span');
+                                span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                    '" title="', escape(theFile.name), '"/>'
+                                ].join('');
+                                localStorage.setItem("File", e.target.result);
+                                document.getElementById('list').insertBefore(span, null);
+                            };
+                        })(f);
+
+                        // Read in the image file as a data URL.
+                        reader.readAsDataURL(f);
+                    }
+                }
+
+                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+            </script>
+            <form id="rr " class="form-horizontal " role="form " style="margin-top:5px;">
+                <div class="form-group ">
+                    <label for="firstName " class="col-sm-3 control-label ">Full Name</label>
+                    <div class="col-sm-6 ">
+                        <input type="text " id="firstName" placeholder="Full Name " class="form-control " autofocus>
+                        <span class="help-block " style="color:white"> Example : John Oliver</span>
+                    </div>
+                </div>
+                <!--Full Name-->
+                <div class="form-group ">
+                    <label for="birthDate " class="col-sm-3 control-label ">Date of Birth</label>
+                    <div class="col-sm-6 ">
+                        <input type="date" id="birthDate" class="form-control " placeholder="Date Of Birth.. ">
+                    </div>
+                </div>
+                <!--DOB-->
+                <div class="form-group ">
+                    <label class="control-label col-sm-3 ">Gender</label>
+                    <div class="col-sm-6 ">
+                        <div class="radio">
+                            <label><input type="radio" id="Gender" name="optradio" value="Male">Male</label>
+                            <label></label>
+                            <label><input type="radio" id="Gender" name="optradio" value="Female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <!--Gender-->
+                <div class="form-group">
+                    <label for="country" class="col-sm-3 control-label ">Country</label>
+                    <div class="col-sm-6 ">
+                        <select id="country" class="form-control ">
+                    <option value="none">Choose Your Country</option>
+                    <option value="India">India</option>
+                    <option value="China">China</option>
+                    <option value="Russia">Russia</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Australia">Australia</option>
+                </select>
+                    </div>
+                </div>
+                <!-- Country -->
+                <div class="form-group ">
+                    <label for="About " class="col-sm-3 control-label ">About..</label>
+                    <div class="col-sm-6 ">
+                        <textarea class="form-control " rows="5 " id="comment" placeholder="About You...in 50-100 words "></textarea>
+                    </div>
+                </div>
+                <!--About-->
+                <div class="form-group ">
+                    <label for="theme" class="col-sm-3 control-label ">Theme</label>
+                    <div class="col-sm-6 ">
+                        <select id="theme" class="form-control ">
+                            <option value="none">Choose Your Theme </option>
+                    <option value="Traditional">Traditional</option>
+                    <option value="Modern">Modern</option>
+                </select>
+                    </div>
+                </div>
+                <!-- Theme -->
+                <div class="form-group ">
+                    <div class="col-sm-6 col-sm-offset-3 ">
+                        <button type="submit" id="Registration" class="btn btn-primary btn-block ">Login</button>
+                    </div>
+                </div>
+            </form>
+            <!-- /form -->
+
+        </div>
+        <!-- ./container -->
+        <div>
+        </div>
+    </center>
+
+</body>
+
+</html>
